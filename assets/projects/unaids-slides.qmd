@@ -1,0 +1,93 @@
+---
+title: "`Mindthegap` Demo"
+subtitle: "This presentation outlines some of the use cases for `mindthegap` and the *UNAIDS 2023 Estimates*"
+date: "2024-10-17"
+author: "Lemlem Baraki"
+format: 
+  revealjs:
+    transition: slide 
+    slide-number: c/t 
+    width: 1600
+    height: 900
+    logo: "https://github.com/USAID-OHA-SI/mindthegap/raw/main/man/figures/logo.png"
+    theme: simple 
+    echo: true 
+    rtl: false 
+    incremental: true 
+    preview-links: auto 
+editor: visual
+editor_options:
+  chunk_output_type: inline
+project:
+  execute-dir: file
+---
+
+# UNAIDS 2024 Update
+
+![](https://crossroads.unaids.org/wp-content/uploads/2024/07/Summary-706x1024.webp)
+
+```{r}
+#| echo: false
+#| output: false
+
+
+library(gagglr)
+library(tidyverse)
+library(glamr)
+
+```
+
+## Accessing Clean Data {.smaller}
+
+When trying to access clean data, you will want to use the `load_unaids` function. There is 1 parameter to be aware of: the `pepfar_only` parameter in which case the default is TRUE. This function pulls in the tidy data set from the package releases.
+
+::: panel-tabset
+### Pull clean data from GitHub Releases
+
+```{r, echo= TRUE}
+
+# Load library 
+library(mindthegap)
+
+df_unaids <- load_unaids(pepfar_only = TRUE)
+#df_est <- pull_unaids(data_type = "HIV Estimates", pepfar_only = TRUE) 
+knitr::kable(df_unaids[1:5, 1:10]) 
+
+```
+:::
+
+## Behind the scenes
+
+```{r}
+#| code-line-numbers: "|1|3-10|11"
+
+load_unaids <- function(pepfar_only = TRUE) 
+{
+    temp_folder <- tempdir()
+    filename <- glue::glue("UNAIDS_2024_Clean_Estimates_PEPFAR-only.rds")
+    if (pepfar_only == FALSE) 
+        filename <- glue::glue("UNAIDS_2024_Clean_Estimates.rds")
+    piggyback::pb_download(file = filename, repo = "USAID-OHA-SI/mindthegap", 
+        tag = "latest", dest = temp_folder, show_progress = FALSE)
+    df <- readr::read_rds(file.path(temp_folder, filename))
+    df <- mindthegap:::handle_historic(df)
+    return(df)
+}
+
+```
+
+## Visualizing Epidemic Control {.smaller}
+
+To evaluate PEPFAR countries progress toward epidemic control, you will want to use the `plot_epi_trends` function. There are 2 parameters to be aware of: the `df` which is the UNAIDS data frame we have loaded and `sel_cntry` which is set to "All PEPFAR" by default. Note: a new aspect of this function is that you can pass through multiple countries to compare across OU's.
+
+::: {column}
+```{r,fig.align='center',fig.width= 10, fig.height=6}
+#| echo: true 
+#| layout-ncol: 2
+
+
+plot_epi_trends(df_unaids)
+plot_epi_trends(df_unaids, sel_cntry = c("Zambia", "Tanzania"))
+
+```
+:::

@@ -1,0 +1,440 @@
+---
+title: "Calculated MER Indicators"
+subtitle: "This presentation outlines how to create commonly used MER calculations using `themask`"
+date: "2023-12-12"
+author: "Lemlem Baraki"
+format: 
+  revealjs:
+    transition: slide 
+    slide-number: c/t 
+    width: 1600
+    height: 900
+    logo: "https://github.com/USAID-OHA-SI/themask/raw/main/man/figures/logo.png"
+    theme: simple 
+    echo: true 
+    rtl: false 
+    incremental: true 
+    preview-links: auto 
+editor: visual
+editor_options:
+    chunk_output_type: inline
+project:
+  execute-dir: file
+---
+
+## Accessing the Faux MSD
+
+**Background**: `themask` houses the PEPFAR MSD-style training dataset to use for testing and public facing work. This is a masked, dummy dataset that should be used for testing, training, and demoing instead of using actual data.
+
+```{r, echo = TRUE}
+
+#install package with vignettes 
+remotes::install_github("USAID-OHA-SI/themask", build_vignettes = TRUE)
+
+#load dependencies
+library(gophr)
+library(glamr)
+library(glitr)
+library(tidyverse)
+library(scales)
+library(systemfonts)
+library(ggtext)
+
+#load the package
+library(themask)
+
+#download
+folderpath_tmp <- glamr::temp_folder()
+msk_download(folderpath_tmp)
+
+#load
+df_mask <- return_latest(folderpath_tmp, "PSNU_IM") %>% 
+  read_psd()
+
+
+```
+
+## How do we calculate viral load coverage (VLC) and viral load supression (VLS)?
+
+-   **VLC** : TX_PVLS_D/TX_CURR_lag2
+
+-   **VLS** : TX_PVLS/TX_PVLS_D
+
+::: panel-tabset
+### VL Function
+
+```{r, echo=TRUE}
+
+create_vl_df <- function(df, ...) {
+  df <- df %>%
+    filter(
+      indicator %in% c("TX_CURR", "TX_PVLS"),
+      standardizeddisaggregate %in% c(
+        "Age/Sex/HIVStatus",
+        "Age/Sex/Indication/HIVStatus"
+      )
+    ) %>%
+    gophr::clean_indicator() %>%
+    group_by(indicator, fiscal_year, ...) %>%
+    summarise(across(starts_with("qtr"), sum, na.rm = TRUE), 
+              .groups = "drop") %>%
+    reshape_msd(include_type = FALSE) %>%
+    pivot_wider(
+      names_from = indicator,
+      names_glue = "{tolower(indicator)}"
+    ) %>%
+    group_by(...) %>% 
+    mutate(
+      tx_curr_lag2 = lag(tx_curr, n = 2),
+      vlc = tx_pvls_d / tx_curr_lag2,
+      vls = tx_pvls / tx_pvls_d,
+      vls_adj = tx_pvls / tx_curr_lag2
+    ) %>% 
+    ungroup()
+  return(df)
+} 
+
+vl_df <- create_vl_df(df_mask, snu1) %>% arrange(desc(period))
+
+```
+
+### VL Dataframe
+
+```{r, echo=TRUE}
+
+create_vl_df(df_mask, snu1) %>% arrange(desc(period))
+
+```
+
+### Example
+
+```{r, echo=FALSE}
+
+
+vl_df %>% 
+filter(str_detect(snu1, "west"),
+       str_detect(period, "FY60")) %>% 
+ggplot(aes(x = period))+
+geom_col(aes(y = vls), fill = "#83dbfb", width = 0.5, alpha = 0.75)  +
+geom_col(aes(y = vlc), fill = "#1e87a5", width = 0.5, alpha = 0.75
+         #position = position_nudge(x = -0.1)
+)+
+geom_text(aes(y = vlc,
+              label = percent(vlc,1)),
+          size = 11/.pt, 
+          family = "Source Sans Pro", 
+          color = grey90k,
+          vjust = -0.5
+) + 
+geom_text(aes(y = vls,
+              label = percent(vls,1)),
+          size = 11/.pt, 
+          family = "Source Sans Pro", 
+          color = grey90k,
+          vjust = -0.5) +
+coord_flip()+
+si_style_xgrid()+
+facet_wrap(~snu1)+
+scale_y_continuous(
+  label = percent_format(1))+
+theme(plot.subtitle = ggtext::element_markdown())+
+labs(x = NULL, y = NULL, 
+     subtitle = glue::glue("<span style = 'color:#1e87a5'>VLC</span> | 
+                        <span style = 'color:#83dbfb'>VLS</span> rates"))
+
+
+```
+:::
+
+## How do we calculate positivity and number needed to test?
+
+-   **Positivity** : HTS_TST_POS/HTS_TST
+
+-   **Number Needed to Test** : HTS_TST/HTS_TST_POS
+
+::: panel-tabset
+### Testing Function
+
+```{r, echo=TRUE}
+
+create_pos_df <- function(df, ...) {
+  df <- df %>%
+    filter(
+      indicator %in% c("HTS_TST", "HTS_TST_POS", "TX_NEW"),
+      standardizeddisaggregate %in% c("Total Numerator"),
+      fiscal_year == 2060,
+      funding_agency == "USAID"
+    ) %>%
+    gophr::clean_indicator() %>%
+    group_by(indicator, fiscal_year, ...) %>%
+    summarise(across(starts_with("qtr"), sum, na.rm = TRUE), 
+              .groups = "drop") %>%
+    reshape_msd(include_type = FALSE) %>%
+    pivot_wider(
+      names_from = indicator,
+      names_glue = "{tolower(indicator)}"
+    ) %>%
+    group_by(...) %>% 
+    mutate(
+      positivity = hts_tst_pos/hts_tst,
+      nnt = hts_tst/hts_tst_pos,
+      link = tx_new/hts_tst_pos
+    ) %>% 
+    ungroup()
+  return(df)
+}   
+
+pos_df <- create_pos_df(df_mask, snu1) %>% arrange(desc(period))
+
+```
+
+### Testing Dataframe
+
+```{r, echo=TRUE}
+
+create_pos_df(df_mask, snu1) %>% arrange(desc(period))
+
+```
+
+### Example
+
+```{r, echo=FALSE}
+
+pos_df %>% 
+filter(str_detect(snu1, "Pacific"),
+       str_detect(period, "FY60")) %>% 
+ggplot(aes(x = period)) +
+geom_col(aes(y = hts_tst), fill = "#e0d4db", width = 0.75,
+         position = position_nudge(x = 0.1)) +
+geom_col(aes(y = hts_tst_pos), fill = "#855C75", width = 0.75) +
+geom_label(aes(y = hts_tst_pos,
+               label = percent(hts_tst_pos/hts_tst, 1)),
+           size = 11/.pt, 
+           family = "Source Sans Pro", 
+           color = grey90k,
+           vjust = -0.5) +
+geom_text(aes(y = hts_tst_pos,
+              label = round(hts_tst/hts_tst_pos)),
+          size = 11/.pt, 
+          family = "Source Sans Pro", 
+          color = grey90k,
+          vjust = -3) +
+si_style_ygrid() +
+#facet_wrap(~snu1, scales = "free_y")+
+scale_y_continuous(labels = label_number(scale_cut = cut_short_scale()))+
+coord_cartesian(expand = F)+
+theme(plot.subtitle = ggtext::element_markdown())+
+labs(x = NULL, y = NULL, 
+     subtitle = glue::glue("<span style = 'color:#e0d4db'>HTS_TST</span> | 
+                        <span style = 'color:#855C75'>HTS_TST_POS</span> | 
+                        Positivity & testing trends"))
+
+
+```
+:::
+
+## How do we calculate linkage?
+
+-   **Linkage** : TX_NEW/HTS_TST_POS
+
+::: panel-tabset
+### Linkage Function
+
+```{r, echo=TRUE}
+
+create_link_df <- function(df, ...) {
+  df <- df %>%
+    filter(
+      indicator %in% c("HTS_TST", "HTS_TST_POS", "TX_NEW"),
+      standardizeddisaggregate %in% c(
+        "Total Numerator"
+      )
+    ) %>%
+    gophr::clean_indicator() %>%
+    group_by(indicator, fiscal_year, ...) %>%
+    summarise(across(starts_with("qtr"), sum, na.rm = TRUE), 
+              .groups = "drop") %>%
+    reshape_msd(include_type = FALSE) %>%
+    pivot_wider(
+      names_from = indicator,
+      names_glue = "{tolower(indicator)}"
+    ) %>%
+    group_by(...) %>% 
+    mutate(
+      link = tx_new/hts_tst_pos
+    ) %>% 
+    ungroup()
+  return(df)
+}    
+
+link_df <- create_link_df(df_mask, snu1) %>% arrange(desc(period))
+
+```
+
+### Linkage Dataframe
+
+```{r, echo=TRUE}
+
+create_link_df(df_mask, snu1) %>% arrange(desc(period))
+
+```
+
+### Example
+
+```{r, echo=FALSE}
+
+
+link_df %>% 
+filter(str_detect(snu1, "South"),
+       str_detect(period, "FY60")) %>% 
+ggplot(aes(x = period)) +
+geom_col(aes(y = hts_tst_pos), fill = "#7ecfc0", width = 0.75,
+         position = position_nudge(x = 0.1)) +
+geom_col(aes(y = tx_new), fill = "#287c6f", width = 0.75, alpha = 0.75) +
+geom_label(aes(y = tx_new,
+               label = percent(tx_new/hts_tst_pos, 1)),
+           size = 11/.pt, 
+           family = "Source Sans Pro", 
+           color = grey90k) +
+si_style_ygrid() +
+#facet_wrap(~snu1, scales = "free_y")+
+scale_y_continuous(labels = label_number(scale_cut = cut_short_scale()))+
+coord_cartesian(expand = T)+
+theme(plot.subtitle = ggtext::element_markdown())+
+labs(x = NULL, y = NULL, 
+     subtitle = glue::glue("<span style = 'color:#7ecfc0'>HTS_TST_POS</span> | 
+                        <span style = 'color:#287c6f'>TX_NEW</span> | 
+                        Linkage rates"))
+
+
+```
+:::
+
+## How do we calculate continuity of treatment (CoT)/retention ?
+
+-   **CoT** : TX_CURR/(TX_CURR_lag1 + TX_NEW)
+
+::: panel-tabset
+### CoT Function
+
+```{r, echo=TRUE}
+
+create_cot_df <- function(df, ...) {
+  df <- df %>%
+    filter(
+      indicator %in% c("TX_CURR", "TX_NEW", "TX_NET_NEW"),
+      standardizeddisaggregate %in% c(
+        "Age/Sex/HIVStatus"
+      )
+    ) %>%
+    gophr::clean_indicator() %>%
+    group_by(indicator, fiscal_year, ...) %>%
+    summarise(across(starts_with("qtr"), sum, na.rm = TRUE), 
+              .groups = "drop") %>%
+    reshape_msd(include_type = FALSE) %>%
+    pivot_wider(
+      names_from = indicator,
+      names_glue = "{tolower(indicator)}"
+    ) %>%
+    group_by(...) %>% 
+    mutate(
+      tx_curr_lag1 = lag(tx_curr, n = 1),
+      ret = tx_curr/(tx_curr_lag1 + tx_new)
+    ) %>% 
+    ungroup()
+  return(df)
+} 
+
+cot_df <- create_cot_df(df_mask, snu1) %>% arrange(desc(period))
+
+```
+
+### CoT Dataframe
+
+```{r, echo=TRUE}
+
+create_cot_df(df_mask, snu1) %>% arrange(desc(period))
+
+```
+
+### Example
+
+```{r, echo=FALSE}
+
+num_pds <- length(unique(cot_df$period))
+
+#top <-
+# cot_df %>% 
+#      filter(str_detect(snu1, "Mid"),
+#          str_detect(period, "FY60")) %>%
+#  ggplot(aes(x = period, group = 1)) +
+# geom_line(aes(y = ret), color = golden_sand) +
+#  geom_point(aes(y = ret), shape = 21, fill = golden_sand, size = 3,
+#          color = "white") +
+#  geom_label(aes(y = ret, label = percent(ret,1)), size = 9/.pt,
+#           family = "Source Sans Pro", color =  "#505050", 
+#          vjust = -1) +
+#si_style_nolines() +
+#expand_limits(y = c(0.7,1.05)) +
+#theme(axis.text.y = element_blank(), 
+#     axis.text.x = element_blank()) +
+#theme(plot.subtitle = ggtext::element_markdown())+
+#labs(x = NULL, y = NULL, 
+#              subtitle = glue::glue("<span style = 'color:#1e87a5'>TX_NEW</span> | 
+#                  <span style = 'color:#83dbfb'>TX_NET_NEW</span> | 
+#                 CoT rates"))
+
+
+cot_df %>% 
+filter(str_detect(snu1, "Mid"),
+       str_detect(period, "FY60")) %>% 
+ggplot(aes(x = period)) +
+#  geom_point(aes(y = ret), shape = 21, fill = golden_sand, size = 3,
+#          color = "white")
+geom_col(aes(y = tx_new), fill = "#1e87a5", width = 0.75,
+         position = position_nudge(x = 0.1), alpha = 0.75) +
+geom_col(aes(y = tx_net_new), fill = "#83dbfb", width = 0.75, alpha = 0.75) +
+geom_text(aes(y = tx_new,
+              label = comma(tx_new)),
+          size = 11/.pt, 
+          family = "Source Sans Pro", 
+          color = grey90k,
+          vjust = -0.5) + 
+geom_text(aes(y = tx_net_new,
+              label = comma(tx_net_new)),
+          size = 11/.pt, 
+          family = "Source Sans Pro", 
+          color = grey90k,
+          vjust = -0.5) +
+geom_label(aes(y = ret,
+               label = percent(ret,1)),
+           size = 11/.pt, 
+           family = "Source Sans Pro", 
+           color = grey90k,
+           vjust = -0.5) + 
+si_style_ygrid()+
+scale_y_continuous(labels = label_number(scale_cut = cut_short_scale()))+
+coord_cartesian(expand = T)+
+theme(plot.subtitle = ggtext::element_markdown())+
+labs(x = NULL, y = NULL, 
+     subtitle = glue::glue("<span style = 'color:#1e87a5'>TX_NEW</span> | 
+                        <span style = 'color:#83dbfb'>TX_NET_NEW</span> | 
+                        CoT rates"))
+
+#top/bottom + plot_layout(heights = c(8,2)) + 
+# plot_annotation()
+
+
+```
+:::
+
+## Resources
+
+-   [MSD Users Guide & Data Dictionary](https://pepfar-panorama.org/pepfarlanding/#systemuse) (found in the Downloads folder under MER; source of information for latest indicator definitions)
+-   [MER Reference Guide](https://help.datim.org/hc/article_attachments/21527004372884) (indicator guide that is updated anually)
+-   [themask vignette](https://usaid-oha-si.github.io/themask/index.html) (details on how to install the package and function changes)
+-   [themask repo](https://github.com/USAID-OHA-SI/themask) (where all the scripts and package updates are stored)
+
+::: footer
+Learn more: \[reach out to Aaron Chafetz, Karishma Srikanth, Tim Essam, and Lemlem Baraki\]
+:::
