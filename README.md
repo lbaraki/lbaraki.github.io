@@ -16,7 +16,7 @@ R · SAS · SPSS · SQL · Tableau
 
 ### Work Experience
 
-**Data Analyst | USAID ** 
+**Data Analyst | USAID** 
 *February 2023 - February 2025*
 - Enhanced an R package to standardize and visualize UNAIDS epidemic estimates, tracking 2030 program goals 
 - Developed a Tableau dashboard to monitor KPIs and identify service gaps in pediatric and adolescent HIV care
