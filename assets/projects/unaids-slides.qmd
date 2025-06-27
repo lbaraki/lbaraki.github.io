@@ -91,3 +91,83 @@ plot_epi_trends(df_unaids, sel_cntry = c("Zambia", "Tanzania"))
 
 ```
 :::
+
+## Visualizing Progress to the 95's {.smaller}
+
+To evaluate a PEPFAR countries progress toward the 95's, you will want to use the `tab_95s` function. There are 5 parameters to be aware of: the `df` which is the UNAIDS data frame we have loaded, `denom` ("Relative" or "PLHIV"), `cntry` for the PEPFAR country of interest, `grp` for the age/sex group, and `yr` which defaults to the max year.
+
+::: panel-tabset
+### Relative Base
+
+```{r, echo=TRUE}
+
+tab_95s(df_unaids, denom = "Relative", cntry = "Namibia", grp = "All")
+
+```
+
+### PLHIV Base
+
+```{r, echo=TRUE}
+
+tab_95s(df_unaids, denom = "PLHIV", cntry = "Namibia", grp = "All")
+```
+:::
+
+## Relative vs PLHIV base
+
+What is the difference between relative base and PLHIV base?
+
+-   **Relative base (95-95-95 targets)** : the denominator remains constant, as this uses the 95% target for PLHIV who know their status, are accessing treatment, and are virally suppressed. This metric is best used for tracking a a program's performance and evaluating the health of PLHIV
+
+-   **PLHIV base (testing & treatment cascade)** : the denominators changes, as this uses PLHIV as the base for the three 95's. This metric is best used for comparing across countries and highlights how many PLHIV are virally suppressed, which is an important indicator of whether a country will be able to end AIDS as a public health threat by 2030
+
+## Additional Use Cases {.smaller}
+
+::: panel-tabset
+### Dataframe
+
+```{r, echo=TRUE}
+
+#Incidence/Prevalence Curves
+df_incid <- load_unaids(pepfar_only = TRUE) %>% 
+  select(year, indicator, country, age, sex, estimate, lower_bound, upper_bound, estimate_flag, achv_epi_control) %>% 
+  filter(indicator %in% c("Incidence (per 1,000)", "Prevalence")) %>% 
+  select(country, year, indicator, age, sex, estimate,lower_bound, upper_bound)
+
+df_incid 
+
+```
+
+### Plot
+
+```{r, echo=TRUE}
+#Ex) Create an incidence curve for Zambia spanning the last 20 years 
+df_zam <- df_incid %>% 
+  filter(indicator == "Incidence (per 1,000)",
+         country == "Zambia", 
+         age == "All",
+         sex == "All",
+        # year %in% c(2000,2005,2010,2015,2020, 2025)
+        )%>% 
+  ggplot(aes(x = year, y= estimate, color = indicator)) +
+  geom_line()+
+  geom_area(fill = grey20k, alpha = 0.75) + 
+  scale_y_continuous()+
+  si_style_ygrid()+
+  theme(legend.position = "none")+
+  labs(title = "Zambia's Steady Decrease in HIV Incidene", y = "Incidence (%)", x = "Years")
+  
+df_zam
+  
+```
+:::
+
+## Resources
+
+-   [UNAIDS 2024 Report](https://www.unaids.org/sites/default/files/media_asset/2024-unaids-global-aids-update_en.pdf) (source of information for indicator definitions and calculation methods)
+-   [mindthegap vignette](https://usaid-oha-si.github.io/mindthegap/index.html) (details on how to install the package and use the functions)
+-   [mindthegap repo](https://github.com/USAID-OHA-SI/mindthegap) (where all the scripts and package updates are stored)
+
+::: footer
+Learn more: \[reach out to Aaron Chafetz, Karishma Srikanth, Tim Essam, and Lemlem Baraki\]
+:::
