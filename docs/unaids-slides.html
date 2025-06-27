@@ -563,6 +563,1117 @@ Lemlem Baraki
 </div>
 </div>
 </div>
+</section>
+<section id="visualizing-progress-to-the-95s" class="slide level2 smaller">
+<h2>Visualizing Progress to the 95’s</h2>
+<p>To evaluate a PEPFAR countries progress toward the 95’s, you will want to use the <code>tab_95s</code> function. There are 5 parameters to be aware of: the <code>df</code> which is the UNAIDS data frame we have loaded, <code>denom</code> (“Relative” or “PLHIV”), <code>cntry</code> for the PEPFAR country of interest, <code>grp</code> for the age/sex group, and <code>yr</code> which defaults to the max year.</p>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Relative Base</a></li><li><a href="#tabset-2-2">PLHIV Base</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="fu">tab_95s</span>(df_unaids, <span class="at">denom =</span> <span class="st">"Relative"</span>, <span class="at">cntry =</span> <span class="st">"Namibia"</span>, <span class="at">grp =</span> <span class="st">"All"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="ebadpvcqaa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#ebadpvcqaa table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ebadpvcqaa thead, #ebadpvcqaa tbody, #ebadpvcqaa tfoot, #ebadpvcqaa tr, #ebadpvcqaa td, #ebadpvcqaa th {
+  border-style: none;
+}
+
+#ebadpvcqaa p {
+  margin: 0;
+  padding: 0;
+}
+
+#ebadpvcqaa .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ebadpvcqaa .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ebadpvcqaa .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ebadpvcqaa .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ebadpvcqaa .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ebadpvcqaa .gt_bottom_border {
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ebadpvcqaa .gt_col_headings {
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 1px;
+  border-bottom-color: #334422;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ebadpvcqaa .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 12px;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ebadpvcqaa .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 12px;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ebadpvcqaa .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ebadpvcqaa .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ebadpvcqaa .gt_column_spanner {
+  border-bottom-style: none;
+  border-bottom-width: 1px;
+  border-bottom-color: #334422;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ebadpvcqaa .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ebadpvcqaa .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ebadpvcqaa .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ebadpvcqaa .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ebadpvcqaa .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ebadpvcqaa .gt_row {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ebadpvcqaa .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ebadpvcqaa .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ebadpvcqaa .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ebadpvcqaa .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ebadpvcqaa .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ebadpvcqaa .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ebadpvcqaa .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ebadpvcqaa .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ebadpvcqaa .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ebadpvcqaa .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ebadpvcqaa .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ebadpvcqaa .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ebadpvcqaa .gt_table_body {
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #FFFFFF;
+}
+
+#ebadpvcqaa .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ebadpvcqaa .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ebadpvcqaa .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ebadpvcqaa .gt_sourcenote {
+  font-size: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ebadpvcqaa .gt_left {
+  text-align: left;
+}
+
+#ebadpvcqaa .gt_center {
+  text-align: center;
+}
+
+#ebadpvcqaa .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ebadpvcqaa .gt_font_normal {
+  font-weight: normal;
+}
+
+#ebadpvcqaa .gt_font_bold {
+  font-weight: bold;
+}
+
+#ebadpvcqaa .gt_font_italic {
+  font-style: italic;
+}
+
+#ebadpvcqaa .gt_super {
+  font-size: 65%;
+}
+
+#ebadpvcqaa .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ebadpvcqaa .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ebadpvcqaa .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ebadpvcqaa .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ebadpvcqaa .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ebadpvcqaa .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ebadpvcqaa .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#ebadpvcqaa .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#ebadpvcqaa div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_heading">
+<th colspan="5" class="gt_heading gt_title gt_font_normal" style="font-family: 'Libre Franklin'; font-weight: 800">NAMIBIA'S TREATMENT TARGET GOALS</th>
+</tr>
+<tr class="odd gt_heading">
+<th colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">2023 | Relative Base</th>
+</tr>
+<tr class="header gt_col_headings">
+<th id="indicator" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase" scope="col">indicator</th>
+<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase" scope="col">estimate</th>
+<th id="bounds" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase" scope="col">bounds</th>
+<th id="goal_rate" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase" scope="col">goal</th>
+<th id="achieved" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase" scope="col">achieved</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd gt_group_heading_row">
+<td colspan="5" id="All" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">All</td>
+</tr>
+<tr class="even gt_row_group_first">
+<td class="gt_row gt_left" headers="All  indicator" style="font-family: 'Source Sans Pro'; font-weight: 400">Percent Known Status of PLHIV</td>
+<td class="gt_row gt_right" headers="All  estimate" style="font-family: 'Source Sans Pro'; font-weight: 400">93%</td>
+<td class="gt_row gt_center" headers="All  bounds" style="font-family: 'Source Sans Pro'; font-weight: 400">[86%-98%]</td>
+<td class="gt_row gt_right" headers="All  goal_rate" style="font-family: 'Source Sans Pro'; font-weight: 400">95%</td>
+<td class="gt_row gt_center" headers="All  achieved" style="font-family: 'Source Sans Pro'; font-weight: 400; color: #000000; background-color: #F8A27E">FALSE</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="All  indicator" style="font-family: 'Source Sans Pro'; font-weight: 400">Percent on ART with Known Status</td>
+<td class="gt_row gt_right" headers="All  estimate" style="font-family: 'Source Sans Pro'; font-weight: 400">95%</td>
+<td class="gt_row gt_center" headers="All  bounds" style="font-family: 'Source Sans Pro'; font-weight: 400">[88%-98%]</td>
+<td class="gt_row gt_right" headers="All  goal_rate" style="font-family: 'Source Sans Pro'; font-weight: 400">95%</td>
+<td class="gt_row gt_center" headers="All  achieved" style="font-family: 'Source Sans Pro'; font-weight: 400; color: #000000; background-color: #5BB5D5">TRUE</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="All  indicator" style="font-family: 'Source Sans Pro'; font-weight: 400">Percent VLS on ART</td>
+<td class="gt_row gt_right" headers="All  estimate" style="font-family: 'Source Sans Pro'; font-weight: 400">98%</td>
+<td class="gt_row gt_center" headers="All  bounds" style="font-family: 'Source Sans Pro'; font-weight: 400">[91%-98%]</td>
+<td class="gt_row gt_right" headers="All  goal_rate" style="font-family: 'Source Sans Pro'; font-weight: 400">95%</td>
+<td class="gt_row gt_center" headers="All  achieved" style="font-family: 'Source Sans Pro'; font-weight: 400; color: #000000; background-color: #5BB5D5">TRUE</td>
+</tr>
+</tbody><tfoot class="gt_sourcenotes">
+<tr class="odd">
+<td colspan="5" class="gt_sourcenote">Source: UNAIDS EDMS Global Data 2024 Release</td>
+</tr>
+</tfoot>
+
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="fu">tab_95s</span>(df_unaids, <span class="at">denom =</span> <span class="st">"PLHIV"</span>, <span class="at">cntry =</span> <span class="st">"Namibia"</span>, <span class="at">grp =</span> <span class="st">"All"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="ndaudzjrip" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#ndaudzjrip table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ndaudzjrip thead, #ndaudzjrip tbody, #ndaudzjrip tfoot, #ndaudzjrip tr, #ndaudzjrip td, #ndaudzjrip th {
+  border-style: none;
+}
+
+#ndaudzjrip p {
+  margin: 0;
+  padding: 0;
+}
+
+#ndaudzjrip .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ndaudzjrip .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ndaudzjrip .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ndaudzjrip .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ndaudzjrip .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ndaudzjrip .gt_bottom_border {
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ndaudzjrip .gt_col_headings {
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 1px;
+  border-bottom-color: #334422;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ndaudzjrip .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 12px;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ndaudzjrip .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 12px;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ndaudzjrip .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ndaudzjrip .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ndaudzjrip .gt_column_spanner {
+  border-bottom-style: none;
+  border-bottom-width: 1px;
+  border-bottom-color: #334422;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ndaudzjrip .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ndaudzjrip .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ndaudzjrip .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ndaudzjrip .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ndaudzjrip .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ndaudzjrip .gt_row {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ndaudzjrip .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ndaudzjrip .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ndaudzjrip .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ndaudzjrip .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ndaudzjrip .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ndaudzjrip .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ndaudzjrip .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ndaudzjrip .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ndaudzjrip .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ndaudzjrip .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ndaudzjrip .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ndaudzjrip .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ndaudzjrip .gt_table_body {
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #FFFFFF;
+}
+
+#ndaudzjrip .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ndaudzjrip .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ndaudzjrip .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ndaudzjrip .gt_sourcenote {
+  font-size: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ndaudzjrip .gt_left {
+  text-align: left;
+}
+
+#ndaudzjrip .gt_center {
+  text-align: center;
+}
+
+#ndaudzjrip .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ndaudzjrip .gt_font_normal {
+  font-weight: normal;
+}
+
+#ndaudzjrip .gt_font_bold {
+  font-weight: bold;
+}
+
+#ndaudzjrip .gt_font_italic {
+  font-style: italic;
+}
+
+#ndaudzjrip .gt_super {
+  font-size: 65%;
+}
+
+#ndaudzjrip .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ndaudzjrip .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ndaudzjrip .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ndaudzjrip .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ndaudzjrip .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ndaudzjrip .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ndaudzjrip .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#ndaudzjrip .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#ndaudzjrip div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_heading">
+<th colspan="5" class="gt_heading gt_title gt_font_normal" style="font-family: 'Libre Franklin'; font-weight: 800">NAMIBIA'S TREATMENT TARGET GOALS</th>
+</tr>
+<tr class="odd gt_heading">
+<th colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">2023 | PLHIV Base</th>
+</tr>
+<tr class="header gt_col_headings">
+<th id="indicator" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase" scope="col">indicator</th>
+<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase" scope="col">estimate</th>
+<th id="bounds" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase" scope="col">bounds</th>
+<th id="goal_rate" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase" scope="col">goal</th>
+<th id="achieved" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase" scope="col">achieved</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd gt_group_heading_row">
+<td colspan="5" id="All" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">All</td>
+</tr>
+<tr class="even gt_row_group_first">
+<td class="gt_row gt_left" headers="All  indicator" style="font-family: 'Source Sans Pro'; font-weight: 400">Percent Known Status of PLHIV</td>
+<td class="gt_row gt_right" headers="All  estimate" style="font-family: 'Source Sans Pro'; font-weight: 400">93%</td>
+<td class="gt_row gt_center" headers="All  bounds" style="font-family: 'Source Sans Pro'; font-weight: 400">[86%-98%]</td>
+<td class="gt_row gt_right" headers="All  goal_rate" style="font-family: 'Source Sans Pro'; font-weight: 400">95%</td>
+<td class="gt_row gt_center" headers="All  achieved" style="font-family: 'Source Sans Pro'; font-weight: 400; color: #000000; background-color: #F8A27E">FALSE</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="All  indicator" style="font-family: 'Source Sans Pro'; font-weight: 400">Percent on ART of PLHIV</td>
+<td class="gt_row gt_right" headers="All  estimate" style="font-family: 'Source Sans Pro'; font-weight: 400">89%</td>
+<td class="gt_row gt_center" headers="All  bounds" style="font-family: 'Source Sans Pro'; font-weight: 400">[82%-98%]</td>
+<td class="gt_row gt_right" headers="All  goal_rate" style="font-family: 'Source Sans Pro'; font-weight: 400">90%</td>
+<td class="gt_row gt_center" headers="All  achieved" style="font-family: 'Source Sans Pro'; font-weight: 400; color: #000000; background-color: #F8A27E">FALSE</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="All  indicator" style="font-family: 'Source Sans Pro'; font-weight: 400">Percent VLS of PLHIV</td>
+<td class="gt_row gt_right" headers="All  estimate" style="font-family: 'Source Sans Pro'; font-weight: 400">87%</td>
+<td class="gt_row gt_center" headers="All  bounds" style="font-family: 'Source Sans Pro'; font-weight: 400">[80%-98%]</td>
+<td class="gt_row gt_right" headers="All  goal_rate" style="font-family: 'Source Sans Pro'; font-weight: 400">86%</td>
+<td class="gt_row gt_center" headers="All  achieved" style="font-family: 'Source Sans Pro'; font-weight: 400; color: #000000; background-color: #5BB5D5">TRUE</td>
+</tr>
+</tbody><tfoot class="gt_sourcenotes">
+<tr class="odd">
+<td colspan="5" class="gt_sourcenote">Source: UNAIDS EDMS Global Data 2024 Release</td>
+</tr>
+</tfoot>
+
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="relative-vs-plhiv-base" class="slide level2">
+<h2>Relative vs PLHIV base</h2>
+<p>What is the difference between relative base and PLHIV base?</p>
+<ul>
+<li class="fragment"><p><strong>Relative base (95-95-95 targets)</strong> : the denominator remains constant, as this uses the 95% target for PLHIV who know their status, are accessing treatment, and are virally suppressed. This metric is best used for tracking a a program’s performance and evaluating the health of PLHIV</p></li>
+<li class="fragment"><p><strong>PLHIV base (testing &amp; treatment cascade)</strong> : the denominators changes, as this uses PLHIV as the base for the three 95’s. This metric is best used for comparing across countries and highlights how many PLHIV are virally suppressed, which is an important indicator of whether a country will be able to end AIDS as a public health threat by 2030</p></li>
+</ul>
+</section>
+<section id="additional-use-cases" class="slide level2 smaller">
+<h2>Additional Use Cases</h2>
+<div class="panel-tabset">
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Dataframe</a></li><li><a href="#tabset-3-2">Plot</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="co">#Incidence/Prevalence Curves</span></span>
+<span id="cb6-2"><a href=""></a>df_incid <span class="ot">&lt;-</span> <span class="fu">load_unaids</span>(<span class="at">pepfar_only =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-3"><a href=""></a>  <span class="fu">select</span>(year, indicator, country, age, sex, estimate, lower_bound, upper_bound, estimate_flag, achv_epi_control) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-4"><a href=""></a>  <span class="fu">filter</span>(indicator <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Incidence (per 1,000)"</span>, <span class="st">"Prevalence"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-5"><a href=""></a>  <span class="fu">select</span>(country, year, indicator, age, sex, estimate,lower_bound, upper_bound)</span>
+<span id="cb6-6"><a href=""></a></span>
+<span id="cb6-7"><a href=""></a>df_incid </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6,974 × 8
+   country  year indicator          age   sex   estimate lower_bound upper_bound
+   &lt;chr&gt;   &lt;int&gt; &lt;chr&gt;              &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+ 1 Angola   1990 Prevalence         15-49 All       0.8         0.5          1  
+ 2 Angola   1990 Prevalence         15-24 Fema…     0.7         0.3          1.2
+ 3 Angola   1990 Prevalence         15-24 Male      0.3         0.1          0.5
+ 4 Angola   1990 Incidence (per 1,… All   All       0.91        0.56         1.1
+ 5 Angola   1991 Prevalence         15-49 All       0.9         0.5          1.1
+ 6 Angola   1991 Prevalence         15-24 Fema…     0.8         0.3          1.3
+ 7 Angola   1991 Prevalence         15-24 Male      0.3         0.1          0.5
+ 8 Angola   1991 Incidence (per 1,… All   All       0.97        0.62         1.2
+ 9 Angola   1992 Prevalence         15-49 All       1           0.6          1.2
+10 Angola   1992 Prevalence         15-24 Fema…     0.8         0.4          1.3
+# ℹ 6,964 more rows</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-3-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="co">#Ex) Create an incidence curve for Zambia spanning the last 20 years </span></span>
+<span id="cb8-2"><a href=""></a>df_zam <span class="ot">&lt;-</span> df_incid <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href=""></a>  <span class="fu">filter</span>(indicator <span class="sc">==</span> <span class="st">"Incidence (per 1,000)"</span>,</span>
+<span id="cb8-4"><a href=""></a>         country <span class="sc">==</span> <span class="st">"Zambia"</span>, </span>
+<span id="cb8-5"><a href=""></a>         age <span class="sc">==</span> <span class="st">"All"</span>,</span>
+<span id="cb8-6"><a href=""></a>         sex <span class="sc">==</span> <span class="st">"All"</span>,</span>
+<span id="cb8-7"><a href=""></a>        <span class="co"># year %in% c(2000,2005,2010,2015,2020, 2025)</span></span>
+<span id="cb8-8"><a href=""></a>        )<span class="sc">%&gt;%</span> </span>
+<span id="cb8-9"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y=</span> estimate, <span class="at">color =</span> indicator)) <span class="sc">+</span></span>
+<span id="cb8-10"><a href=""></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb8-11"><a href=""></a>  <span class="fu">geom_area</span>(<span class="at">fill =</span> grey20k, <span class="at">alpha =</span> <span class="fl">0.75</span>) <span class="sc">+</span> </span>
+<span id="cb8-12"><a href=""></a>  <span class="fu">scale_y_continuous</span>()<span class="sc">+</span></span>
+<span id="cb8-13"><a href=""></a>  <span class="fu">si_style_ygrid</span>()<span class="sc">+</span></span>
+<span id="cb8-14"><a href=""></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)<span class="sc">+</span></span>
+<span id="cb8-15"><a href=""></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Zambia's Steady Decrease in HIV Incidene"</span>, <span class="at">y =</span> <span class="st">"Incidence (%)"</span>, <span class="at">x =</span> <span class="st">"Years"</span>)</span>
+<span id="cb8-16"><a href=""></a>  </span>
+<span id="cb8-17"><a href=""></a>df_zam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="unaids-slides_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="resources" class="slide level2">
+<h2>Resources</h2>
+<ul>
+<li class="fragment"><a href="https://www.unaids.org/sites/default/files/media_asset/2024-unaids-global-aids-update_en.pdf">UNAIDS 2024 Report</a> (source of information for indicator definitions and calculation methods)</li>
+<li class="fragment"><a href="https://usaid-oha-si.github.io/mindthegap/index.html">mindthegap vignette</a> (details on how to install the package and use the functions)</li>
+<li class="fragment"><a href="https://github.com/USAID-OHA-SI/mindthegap">mindthegap repo</a> (where all the scripts and package updates are stored)</li>
+</ul>
+<div class="footer">
+<p>Learn more: [reach out to Aaron Chafetz, Karishma Srikanth, Tim Essam, and Lemlem Baraki]</p>
+</div>
 <div class="quarto-auto-generated-content">
 <p><img src="https://github.com/USAID-OHA-SI/mindthegap/raw/main/man/figures/logo.png" class="slide-logo"></p>
 <div class="footer footer-default">
